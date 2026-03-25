@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Fuel",
+    "slug": "fuel-macro-tracker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "fuel",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A1628"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fuel.macrotracker",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Fuel uses your camera to scan food and barcodes for instant macro tracking."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A1628",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.fuel.macrotracker",
+      "permissions": ["CAMERA"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Fuel needs camera access to scan food and barcodes."
+        }
+      ]
+    ]
+  }
+}
