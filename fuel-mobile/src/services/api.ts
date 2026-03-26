@@ -62,6 +62,16 @@ export async function updateTargets(
   });
 }
 
+export async function updateUser(
+  userId: number,
+  data: { name: string },
+): Promise<User> {
+  return request<User>(`/api/users/${userId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
+}
+
 // ── Food Logs ──────────────────────────────────────────────
 
 export async function createLog(data: {

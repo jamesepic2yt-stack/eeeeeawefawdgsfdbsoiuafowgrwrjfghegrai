@@ -52,6 +52,7 @@ export default function ProfileScreen() {
     setIsSaving(true);
 
     try {
+      await api.updateUser(user.id, { name });
       await api.updateTargets(user.id, {
         target_calories: parseFloat(calories) || 2000,
         target_protein_g: parseFloat(protein) || 150,
@@ -59,13 +60,13 @@ export default function ProfileScreen() {
         target_carbs_g: parseFloat(carbs) || 250,
       });
       await initUser();
-      Alert.alert('Saved', 'Your targets have been updated.');
+      Alert.alert('Saved', 'Your profile has been updated.');
     } catch {
-      Alert.alert('Error', 'Failed to save targets. Please try again.');
+      Alert.alert('Error', 'Failed to save changes. Please try again.');
     } finally {
       setIsSaving(false);
     }
-  }, [user, calories, protein, fat, carbs, initUser]);
+  }, [user, name, calories, protein, fat, carbs, initUser]);
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>

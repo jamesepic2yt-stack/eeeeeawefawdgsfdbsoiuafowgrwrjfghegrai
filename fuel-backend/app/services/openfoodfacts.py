@@ -15,11 +15,12 @@ def _parse_off_product(product: dict) -> FoodSearchResult:
     """Parse an OpenFoodFacts product into our unified schema."""
     nutriments = product.get("nutriments", {})
 
-    # OFF uses per-100g values; also provides per-serving if available
-    calories = nutriments.get("energy-kcal_serving") or nutriments.get("energy-kcal_100g", 0)
-    protein = nutriments.get("proteins_serving") or nutriments.get("proteins_100g", 0)
-    fat = nutriments.get("fat_serving") or nutriments.get("fat_100g", 0)
-    carbs = nutriments.get("carbohydrates_serving") or nutriments.get("carbohydrates_100g", 0)
+    # OFF uses per-100g values; also provides per-serving if available.
+    # Use `is not None` instead of `or` to avoid treating 0 as missing.
+    calories = nutriments.get("energy-kcal_serving") if nutriments.get("energy-kcal_serving") is not None else nutriments.get("energy-kcal_100g", 0)
+    protein = nutriments.get("proteins_serving") if nutriments.get("proteins_serving") is not None else nutriments.get("proteins_100g", 0)
+    fat = nutriments.get("fat_serving") if nutriments.get("fat_serving") is not None else nutriments.get("fat_100g", 0)
+    carbs = nutriments.get("carbohydrates_serving") if nutriments.get("carbohydrates_serving") is not None else nutriments.get("carbohydrates_100g", 0)
 
     serving_size_str = product.get("serving_size", "")
     serving_size = None
